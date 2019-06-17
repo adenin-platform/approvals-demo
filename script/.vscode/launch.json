@@ -2,11 +2,12 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Debug Function",
       "type": "node",
+      "protocol": "auto",
       "request": "attach",
-      "port": 5858,
-      "timeout": 120000
+      "name": "Attach to Process",
+      "address": "localhost",
+      "port": 9229
     }
   ]
 }

@@ -57,20 +57,6 @@ properties:
       }
       </style>
     updateMode: 0
-  view6:
-    type: element
-    title: Liquid View 6
-    xtype: at-core-view
-    view: |-
-      {% if showList == true %}
-      	<div class="p background-green font-title" style="text-align: center; font-size: 16px;">
-      		To review or reject an item, go to the <at-link href="{{link}}" class="white font-underline">Approvals App.</at-link>
-      	</div>
-      {% endif %}
-    modelRoot: state.model
-    actionListeners:
-      - _all
-    updateMode: 0
   vlist7:
     type: element
     xtype: at-core-vlist
@@ -80,6 +66,8 @@ properties:
     listHeight: 315px
     listHeightExpanded: 545px
     scrollMode: 0
+    actionListeners:
+      - _all
   footer8:
     type: element
     title: Go to Approvals App
