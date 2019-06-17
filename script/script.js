@@ -7,10 +7,12 @@ module.exports = async (activity) => {
     case 'approve':
       approve();
       break;
+
     // reject action callback
     case 'reject':
       reject();
       break;
+
     // request of approvals list
     default:
       generate();
@@ -60,11 +62,7 @@ module.exports = async (activity) => {
     let pageSize = parseInt(activity.Request.Query.pageSize) || 20;
 
     // if it is a request for the next page, fetch those values (or defaults)
-    if (
-      activity.Request.Data &&
-      activity.Request.Data.args &&
-      activity.Request.Data.args.atAgentAction === 'nextpage'
-    ) {
+    if (activity.Request.Data && activity.Request.Data.args && activity.Request.Data.args.atAgentAction === 'nextpage') {
       action = 'nextpage';
       page = parseInt(activity.Request.Data.args._page) || 2;
       pageSize = parseInt(activity.Request.Data.args._pageSize) || 20;
@@ -74,13 +72,19 @@ module.exports = async (activity) => {
     if (page < 0) page = 1;
     if (pageSize < 1 || pageSize > 99) pageSize = 20;
 
+    // let the card know we want the next page next time, and current position
+    activity.Response.Data._action = action;
+    activity.Response.Data._page = page;
+    activity.Response.Data._pageSize = pageSize;
+
     const items = [];
 
     // loop from first to last index of current page
     for (let i = (page - 1) * pageSize; i < page * pageSize; i++) {
-      // genarate some random items, where we would normally fetch from API
-      const id = (page * 100) + i + 1 - ((page - 1) * pageSize); // page + index, e.g. page 2 item 4: 204
+      // generate an ID of page number + index on page (e.g. page 1 item 4, id = 104)
+      const id = (page * 100) + i + 1 - ((page - 1) * pageSize);
 
+      // genarate some random items, where we would normally fetch from API
       items.push({
         id: id,
         title: `approval ${id}`,
@@ -112,10 +116,5 @@ module.exports = async (activity) => {
     } else {
       activity.Response.Data.description = 'You have no approvals.';
     }
-
-    // let the card know we want the next page next time, and current position
-    activity.Response.Data._action = action;
-    activity.Response.Data._page = page;
-    activity.Response.Data._pageSize = pageSize;
   }
 };
