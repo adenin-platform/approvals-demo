@@ -6,67 +6,78 @@ properties:
     xtype: at-core-view
     view: |-
       <div class="container layout-vertical">
-      	{% unless approved == true %}
+      	{% if approved == false and declined == false %}
       		<div class="layout-horizontal background-white">
-      			{% if picture %}
+      			{% if avatar %}
       				<div class="layout-start py pl">
-      					<img style="width: 60px; height: 60px; display: block; background-image: url('{{picture}}');background-color:lightgrey;background-size: cover;background-repeat: no-repeat;background-position: 50% 50%;;border-radius: 50%;">
+      					<img style="width: 60px; height: 60px; display: block; background-image: url('{{avatar}}');background-color:lightgrey;background-size: cover;background-repeat: no-repeat;background-position: 50% 50%;;border-radius: 50%;">
       				</div>
       			{% endif %}
       			<div class="layout-flex layout-vertical pl">
-      				<div class="layout-horizontal layout-justified">
-      					<div class="font-subhead pt" style="color: #58585b;">
-      						{{attributes.requesterName}}
+      				<div class="layout-inline">
+      					<div class="font-subhead pt layout-start layout-flex-auto" style="color: #58585b;">
+      						{{title}}
       					</div>
-      					<div class="font-caption pt pr grey">
-      						{{attributes.requestDate}}
+        				<div class="layout-end">
+      						<at-carbon-moment datetime="{{date}}" from-now ago class="font-caption pt pr grey"></at-carbon-moment>
       					</div>
       				</div>
       				<div class="pbsm pr container layout-vertical black">
-      					<div class="font-body1" style="margin-top: 3px; margin-bottom: 3px;">
-      						{{attributes.approvalType.name}}
-      					</div>
-      					{% capture bodyLength %}{{title | size}}{% endcapture %}
-      					{% if bodyLength < 88 %}
-      						<div class="font-caption dark-grey">
-      							{{title}}
-      						</div>	
-      					{% else %}
-      						<div class="font-caption dark-grey" style="cursor: pointer;" at-click-action="expandBody">
-      							{% if expanded == true %}
-      								<div class="layout-vertical">
-      									<div class="pbsm">
-      										{{title}}
-      									</div>
-      									<div class="layout-horizontal layout-end-justified">
-      										<at-carbon-icon icon="now:caret-up" class="grey approval-caret-icon"></at-carbon-icon>
-      									</div>
-      								</div>
-      							{% else %}
-      								<div class="layout-vertical">
-      									<div class="pbsm">
-      										{{title |  truncatewords: 8}}
-      									</div>
-      									<div class="layout-horizontal layout-end-justified">
-      										<at-carbon-icon icon="now:caret-down" class="grey approval-caret-icon"></at-carbon-icon>
-      									</div>
-      								</div>
-      							{% endif %}
+      					{% if type %}
+      						<div class="font-body1" style="margin-top: 3px; margin-bottom: 3px;">
+      							{{type}}
       						</div>
       					{% endif %}
-      					<div class="ptsm">
-      						<at-carbon-button class="ml0 background-green button-sm" button-type="contained" button-color="green" label="Quick Approve" at-click-action="quickApprove" at-agent-action="approve"></at-carbon-button>
+      					{% if description %}
+      						{% capture bodyLength %}{{description | size}}{% endcapture %}
+      						{% if bodyLength < 88 %}
+      							<div class="font-caption dark-grey">
+      								{{description}}
+      							</div>	
+      						{% else %}
+      							<div class="font-caption dark-grey" style="cursor: pointer;" at-click-action="expandBody">
+      								{% if expanded == true %}
+      									<div class="layout-vertical">
+      										<div class="pbsm">
+      											{{description}}
+      										</div>
+      										<div class="layout-horizontal layout-end-justified">
+      											<at-carbon-icon icon="now:caret-up" class="grey approval-caret-icon"></at-carbon-icon>
+      										</div>
+      									</div>
+      								{% else %}
+      									<div class="layout-vertical">
+      										<div class="pbsm">
+      											{{description |  truncatewords: 8}}
+                          </div>
+      										<div class="layout-horizontal layout-end-justified">
+      											<at-carbon-icon icon="now:caret-down" class="grey approval-caret-icon"></at-carbon-icon>
+      										</div>
+      									</div>
+      								{% endif %}
+      							</div>
+      						{% endif %}
+      					{% endif %}
+      					<div class="font-button layout-horizontal ptsm">
+      						<div class="ml0 green" at-click-action="quickApprove" at-agent-action="approve" style="cursor:pointer">Approve</div>
+      						<div class="ml red" at-click-action="quickDecline" at-agent-action="decline" style="cursor:pointer">Decline</div>
       					</div>
       				</div>
       				<div class="bb pt"></div>
       			</div>
       		</div>
-      	{% endunless %}
-      	{% if approved == true %}
+      	{% elsif approved == true %}
       		<div class="psm layout-horizontal" style="background-color: #E3F2E3;">
       			<at-carbon-icon icon="now:checkmark" class="" style="color: #43A942;"></at-carbon-icon>
       			<div class="plsm font-caption" style="margin-top: 2px;">
       				Approved request.
+      			</div>
+      		</div>
+        {% elsif declined == true %}
+        	<div class="psm layout-horizontal" style="background-color: #f2e2e2;">
+      			<at-carbon-icon icon="now:cancel" class="" style="color: #a84141;"></at-carbon-icon>
+      			<div class="plsm font-caption" style="margin-top: 2px;">
+      				Declined request.
       			</div>
       		</div>
       	{% endif %}
@@ -83,28 +94,34 @@ properties:
     modelRoot: state.model
 $meta:
   cardId: !!int 35
-  preview-mode: static
+  preview-mode: live
   preview-container: item
   search-term: 
   service-url: 
   preview-data: |-
     {
-      "attributes.requesterName": "Aaron Tanner",
-      "attributes.approvalType.name": "PTO: 40 Hours Requested",
-      "attributes.requestDate": "2:29pm",
-      "attributes.title": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer malesuada enim nec sapien consectetur porta. Proin quis purus justo. Integer malesuada enim nec sapien consectetur.",
-      "picture": "https://i.imgur.com/Ir1JgKS.png"
+      "id": "1054889",
+      "title": "PTO Request",
+      "link": "https://www.adenin.com/pocdef",
+      "date": "2019-06-17T10:08:17.051Z"
     }
   xclass: 
   xstyle: 
   code: |-
     action.initialize = function (state) {
     	state.model.approved = false;
+      state.model.declined = false;
       state.model.expanded = false;
     }
 
     action.quickApprove = function (evt) {
-    	evt.model.approved = true;  
+    	evt.model.approved = true;
+      evt.model.declined = false;
+    }
+
+    action.quickDecline = function (evt) {
+    	evt.model.declined = true;
+      evt.model.approved = false;  
     }
 
     action.expandBody = function (evt) {
