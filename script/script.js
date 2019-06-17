@@ -79,7 +79,7 @@ module.exports = async (activity) => {
     // loop from first to last index of current page
     for (let i = (page - 1) * pageSize; i < page * pageSize; i++) {
       // genarate some random items, where we would normally fetch from API
-      const id = (page * 100) + i + 1 - ((page - 1) * pageSize);
+      const id = (page * 100) + i + 1 - ((page - 1) * pageSize); // page + index, e.g. page 2 item 4: 204
 
       items.push({
         id: id,
