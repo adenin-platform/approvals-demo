@@ -1,6 +1,6 @@
 contentType: Card
 title: Approvals
-name: cisco-approvals
+name: my-approvals
 StreamSource: null
 CollectionModeField:
   CollectionMode: 0
@@ -11,7 +11,7 @@ MaxItemsField:
 CardComponent: my-approvals/my-approvals-card
 StoreMetadataField:
   description: See your pending approvals, quick approve them or open the Approvals App to manage them.
-  logourl: cisco-approvals/Approvals.svg
+  logourl: my-approvals/Approvals.svg
   storehide: !!bool false
   disableWorkplace: !!bool false
   promotion: !!bool true
