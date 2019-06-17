@@ -1,0 +1,113 @@
+$type: card
+properties:
+  view1:
+    type: element
+    title: View
+    xtype: at-core-view
+    view: |-
+      <div class="container layout-vertical">
+      	{% unless approved == true %}
+      		<div class="layout-horizontal background-white">
+      			{% if picture %}
+      				<div class="layout-start py pl">
+      					<img style="width: 60px; height: 60px; display: block; background-image: url('{{picture}}');background-color:lightgrey;background-size: cover;background-repeat: no-repeat;background-position: 50% 50%;;border-radius: 50%;">
+      				</div>
+      			{% endif %}
+      			<div class="layout-flex layout-vertical pl">
+      				<div class="layout-horizontal layout-justified">
+      					<div class="font-subhead pt" style="color: #58585b;">
+      						{{attributes.requesterName}}
+      					</div>
+      					<div class="font-caption pt pr grey">
+      						{{attributes.requestDate}}
+      					</div>
+      				</div>
+      				<div class="pbsm pr container layout-vertical black">
+      					<div class="font-body1" style="margin-top: 3px; margin-bottom: 3px;">
+      						{{attributes.approvalType.name}}
+      					</div>
+      					{% capture bodyLength %}{{title | size}}{% endcapture %}
+      					{% if bodyLength < 88 %}
+      						<div class="font-caption dark-grey">
+      							{{title}}
+      						</div>	
+      					{% else %}
+      						<div class="font-caption dark-grey" style="cursor: pointer;" at-click-action="expandBody">
+      							{% if expanded == true %}
+      								<div class="layout-vertical">
+      									<div class="pbsm">
+      										{{title}}
+      									</div>
+      									<div class="layout-horizontal layout-end-justified">
+      										<at-carbon-icon icon="now:caret-up" class="grey approval-caret-icon"></at-carbon-icon>
+      									</div>
+      								</div>
+      							{% else %}
+      								<div class="layout-vertical">
+      									<div class="pbsm">
+      										{{title |  truncatewords: 8}}
+      									</div>
+      									<div class="layout-horizontal layout-end-justified">
+      										<at-carbon-icon icon="now:caret-down" class="grey approval-caret-icon"></at-carbon-icon>
+      									</div>
+      								</div>
+      							{% endif %}
+      						</div>
+      					{% endif %}
+      					<div class="ptsm">
+      						<at-carbon-button class="ml0 background-green button-sm" button-type="contained" button-color="green" label="Quick Approve" at-click-action="quickApprove" at-agent-action="approve"></at-carbon-button>
+      					</div>
+      				</div>
+      				<div class="bb pt"></div>
+      			</div>
+      		</div>
+      	{% endunless %}
+      	{% if approved == true %}
+      		<div class="psm layout-horizontal" style="background-color: #E3F2E3;">
+      			<at-carbon-icon icon="now:checkmark" class="" style="color: #43A942;"></at-carbon-icon>
+      			<div class="plsm font-caption" style="margin-top: 2px;">
+      				Approved request.
+      			</div>
+      		</div>
+      	{% endif %}
+      </div>
+
+      <style>
+      .aprroval-caret-icon {
+        width: 12px;
+        height: 12px;
+      }
+      </style>
+    actionListeners:
+      - _all
+    modelRoot: state.model
+$meta:
+  cardId: !!int 35
+  preview-mode: static
+  preview-container: item
+  search-term: 
+  service-url: 
+  preview-data: |-
+    {
+      "attributes.requesterName": "Aaron Tanner",
+      "attributes.approvalType.name": "PTO: 40 Hours Requested",
+      "attributes.requestDate": "2:29pm",
+      "attributes.title": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer malesuada enim nec sapien consectetur porta. Proin quis purus justo. Integer malesuada enim nec sapien consectetur.",
+      "picture": "https://i.imgur.com/Ir1JgKS.png"
+    }
+  xclass: 
+  xstyle: 
+  code: |-
+    action.initialize = function (state) {
+    	state.model.approved = false;
+      state.model.expanded = false;
+    }
+
+    action.quickApprove = function (evt) {
+    	evt.model.approved = true;  
+    }
+
+    action.expandBody = function (evt) {
+    	evt.model.expanded = !evt.model.expanded;
+    }
+rules: []

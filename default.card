@@ -1,0 +1,132 @@
+$type: card
+rules: []
+properties:
+  title:
+    type: element
+    xtype: at-carbon-card-title
+    title: title
+    xgridcols: 12
+    xstyle: 
+    xclass: 
+    actionListeners:
+      - _start
+    modelBind: 'label: title'
+  view3:
+    type: element
+    title: Liquid View 3
+    xtype: at-core-view
+    actionListeners:
+      - _all
+    modelRoot: state.model
+    view: |-
+      {% unless showList == true %} 
+      	<div class="layout-vertical layout-center-center">
+      		{% if value > 0 %}
+      			<div class="approvals-count-circle green" style="border: 3px solid var(--at-green);">
+      				<div class="font-headline" style="text-align: center; line-height: 50px;">
+      					{% if value > 99 %}
+      						99+
+      					{% else %}
+      						{{value}}
+      					{% endif %}
+      				</div>
+      			</div>
+      			<div class="psm font-headline dark-grey">Pending Approvals</div>
+      			<div class="ptsm pb mb">
+      				<at-carbon-button class="background-green" button-type="contained" button-color="green" label="View Approvals" at-click-action="showList"></at-carbon-button>
+      			</div>
+      		{% endif %}
+      		{% if value == 0 %}
+      			<div class="font-title green mt">
+      				You're all caught up!
+      			</div>
+      			<div class="p layout-self-stretch font-body1 text-secondary" style="text-align: center;">
+      				You have no pending approvals. You can go to the Approvals App to view your recent activity.
+      			</div>
+      			<div class="pb mbsm">
+      				<at-link href="{{link}}" id="openapp">
+      					<at-carbon-button class="background-grey" button-type="contained" button-color="green" label="Go to Approvals"></at-carbon-button>
+      				</at-link>
+      			</div>
+      		{% endif %}
+      	</div>
+      {% endunless %}
+
+      <style>
+      .approvals-count-circle {
+        height: 52px;
+        width: 52px;
+        border-radius: 50%;
+      }
+      </style>
+    updateMode: 0
+  view6:
+    type: element
+    title: Liquid View 6
+    xtype: at-core-view
+    view: |-
+      {% if showList == true %}
+      	<div class="p background-green font-title" style="text-align: center; font-size: 16px;">
+      		To review or reject an item, go to the <at-link href="{{link}}" class="white font-underline">Approvals App.</at-link>
+      	</div>
+      {% endif %}
+    modelRoot: state.model
+    actionListeners:
+      - _all
+    updateMode: 0
+  vlist7:
+    type: element
+    xtype: at-core-vlist
+    itemComponent: my-approvals/my-approvals-item-card
+    modelBind: 'hide: !showList'
+    hide: !!bool true
+    listHeight: 315px
+    listHeightExpanded: 545px
+    scrollMode: 0
+  footer8:
+    type: element
+    title: Go to Approvals App
+    xtype: at-carbon-card-footer
+    href: https://approvals.cisco.com/#/inbox
+    expandable: !!bool true
+    hide: !!bool true
+    modelBind: 'hide: !showList, expandable: items.length > 3, href: link, label: linkLabel'
+    expandMode: 2
+$meta:
+  cardId: !!int 35
+  preview-data: |-
+    {
+      "_action": "firstpage",
+      "_page": 1,
+      "_pageSize": 20,
+      "items": [
+        {
+          "id": "1054889",
+          "title": "PTO Request",
+          "link": "https://www.adenin.com/pocdef",
+          "date": "2019-06-17T08:30:30.925Z"
+        }
+      ],
+      "title": "My Approvals",
+      "link": "https://www.adenin.com/pocdef",
+      "linkLabel": "All Approvals",
+      "actionable": true,
+      "value": 1,
+      "color": "blue",
+      "description": "You have 1 approval.",
+      "_settings": {}
+    }
+  preview-mode: live
+  preview-container: event
+  search-term: 
+  service-url: 
+  xclass: 
+  xstyle: 
+  code: |-
+    action.initialize = function(evt) {
+      evt.model.showList = false;
+    }
+
+    action.showList = function(evt) {
+      evt.model.showList = true;
+    }

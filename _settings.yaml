@@ -1,0 +1,73 @@
+contentType: Card
+title: Approvals
+name: cisco-approvals
+StreamSource: null
+CollectionModeField:
+  CollectionMode: 0
+PriorityField:
+  Priority: 5
+MaxItemsField:
+  MaxItems: 3
+CardComponent: my-approvals/my-approvals-card
+StoreMetadataField:
+  description: See your pending approvals, quick approve them or open the Approvals App to manage them.
+  logourl: cisco-approvals/Approvals.svg
+  storehide: !!bool false
+  disableWorkplace: !!bool false
+  promotion: !!bool true
+CommonPart:
+  Owner: !!int 23
+  Container: null
+  CreatedUtc: 2018-08-09T14:51:47.0019601Z
+  PublishedUtc: 2019-05-09T14:28:05.3202944Z
+  ModifiedUtc: 2019-05-09T14:28:05.2734140Z
+  VersionCreatedUtc: 2019-05-09T14:28:05.0000000
+  VersionPublishedUtc: 2019-05-09T14:28:05.0000000
+  VersionModifiedUtc: 2019-05-09T14:28:05.0000000
+ServicePart:
+  ConnectorTypeName: ScriptConnector
+  ConnectorTypeId: !!int 27
+  ConnectorName: poc
+  ServiceName: myapprovals
+  Url: ~/api/adenin.GateKeeper.Connector/poc/myapprovals
+  ServiceParameters: '{}'
+SearchContextPart:
+  Query: null
+  Interface: null
+CommandPart:
+  CommandType: None
+  Command: 
+  DefaultDate: null
+  Intent: null
+  Ext: {}
+AppPart:
+  App: null
+  Url: 
+  ExtUrl: 
+  Priority: !!int 0
+  AppFaceId: !!int 0
+  Category: orange
+  Icon: now:search
+  CSSClasses: null
+  Enabled: !!bool false
+  NewWindow: !!bool false
+  UrlWithId: !!bool true
+  AvailableAppFaceRecords: null
+  HasPattern: !!bool false
+RoleViewPermissionsPart:
+  AllowedRoles: []
+  Audiences:
+    - Authenticated
+  Mandatory: False
+RecurringTaskPart:
+  Schedule: '- - - - -'
+  ActivityType: adenin.Now.Activities.CardTask.UpdateCard
+  StartDateUtc: null
+  EndDateUtc: null
+  NextOccurrenceUtc: null
+  Priority: !!int 5
+  Status: Enabled
+  NowFlag: 0
+  LastExecutionUTC: null
+  EnableWebHook: !!bool false
+  WebHookToken: null
