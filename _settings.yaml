@@ -1,13 +1,13 @@
 contentType: Card
 title: Approvals
 name: my-approvals
-StreamSource: null
 CollectionModeField:
   CollectionMode: 0
-PriorityField:
-  Priority: 5
 MaxItemsField:
   MaxItems: 3
+PriorityField:
+  Priority: 5
+StreamSource: null
 CardComponent: my-approvals/my-approvals-card
 StoreMetadataField:
   description: See your pending approvals, quick approve them or open the Approvals App to manage them.
@@ -16,21 +16,20 @@ StoreMetadataField:
   disableWorkplace: !!bool false
   promotion: !!bool true
 CommonPart:
-  Owner: !!int 23
+  Owner: !!int 2
   Container: null
-  CreatedUtc: 2018-08-09T14:51:47.0019601Z
-  PublishedUtc: 2019-05-09T14:28:05.3202944Z
-  ModifiedUtc: 2019-05-09T14:28:05.2734140Z
-  VersionCreatedUtc: 2019-05-09T14:28:05.0000000
-  VersionPublishedUtc: 2019-05-09T14:28:05.0000000
-  VersionModifiedUtc: 2019-05-09T14:28:05.0000000
+  CreatedUtc: 2019-06-17T08:53:34.5568295Z
+  PublishedUtc: 2019-06-17T12:48:34.9985117Z
+  ModifiedUtc: 2019-06-17T12:48:34.9385153Z
+  VersionCreatedUtc: 2019-06-17T12:48:34.0000000
+  VersionPublishedUtc: 2019-06-17T12:48:34.0000000
+  VersionModifiedUtc: 2019-06-17T12:48:34.0000000
 ServicePart:
-  ConnectorTypeName: ScriptConnector
-  ConnectorTypeId: !!int 27
-  ConnectorName: poc
-  ServiceName: myapprovals
-  Url: ~/api/adenin.GateKeeper.Connector/poc/myapprovals
-  ServiceParameters: '{}'
+  ConnectorTypeId: !!int 0
+  ConnectorName: Script
+  ServiceName: Script
+  Url: ~/api/adenin.GateKeeper.Script
+  ServiceParameters: '{"tokens":""}'
 SearchContextPart:
   Query: null
   Interface: null
