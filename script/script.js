@@ -44,7 +44,7 @@ module.exports = async (activity) => {
     // fetch the ID of the rejected item
     const id = activity.Request.Data.model.id;
 
-    // here we would implement logic to approve the item with above ID in an API call
+    // here we would implement logic to reject the item with above ID in an API call
 
     // send a success response
     activity.Response.Data = {
