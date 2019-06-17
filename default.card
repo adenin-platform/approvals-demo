@@ -31,17 +31,14 @@ properties:
       					{% endif %}
       				</div>
       			</div>
-      			<div class="psm font-headline dark-grey">Pending Approvals</div>
+      			<div class="psm font-headline dark-grey">{{description}}</div>
       			<div class="ptsm pb mb">
       				<at-carbon-button class="background-green" button-type="contained" button-color="green" label="View Approvals" at-click-action="showList"></at-carbon-button>
       			</div>
       		{% endif %}
       		{% if value == 0 %}
       			<div class="font-title green mt">
-      				You're all caught up!
-      			</div>
-      			<div class="p layout-self-stretch font-body1 text-secondary" style="text-align: center;">
-      				You have no pending approvals. You can go to the Approvals App to view your recent activity.
+      				{{description}}
       			</div>
       			<div class="pb mbsm">
       				<at-link href="{{link}}" id="openapp">
