@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "script.js",
-  "dependencies": {},
+  "dependencies": {
+    "got": "^9.6.0"
+  },
   "devDependencies": {}
 }

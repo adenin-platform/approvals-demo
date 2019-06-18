@@ -60,7 +60,7 @@ properties:
       					{% endif %}
       					<div class="font-button layout-horizontal ptsm">
       						<div class="ml0 green" at-click-action="quickApprove" at-agent-action="approve" style="cursor:pointer">Approve</div>
-      						<div class="ml red" at-click-action="quickDecline" at-agent-action="decline" style="cursor:pointer">Decline</div>
+      						<div class="ml red" at-click-action="quickDecline" at-agent-action="reject" style="cursor:pointer">Decline</div>
       					</div>
       				</div>
       				<div class="bb pt"></div>

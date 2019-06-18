@@ -1,21 +1,23 @@
 'use strict';
 
+const got = require('got');
+
 module.exports = async (activity) => {
   try {
     switch (activity.Request.Path) {
     // approve action callback
     case 'approve':
-      approve();
+      await approve();
       break;
 
     // reject action callback
     case 'reject':
-      reject();
+      await reject();
       break;
 
     // request of approvals list
     default:
-      generate();
+      await generate();
     }
   } catch (error) {
     // standard error handling
@@ -29,33 +31,39 @@ module.exports = async (activity) => {
     };
   }
 
-  function approve() {
+  async function approve() {
     // fetch the ID of the approved item
     const id = activity.Request.Data.model.id;
 
-    // here we would implement logic to approve the item with above ID in an API call
+    const response = await got.put(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+      body: activity.Request.Data.model,
+      json: true
+    });
 
     // send a success response
     activity.Response.Data = {
       id: id,
-      success: true
+      success: response.statusCode === 200
     };
   }
 
-  function reject() {
+  async function reject() {
     // fetch the ID of the rejected item
     const id = activity.Request.Data.model.id;
 
-    // here we would implement logic to reject the item with above ID in an API call
+    const response = await got.put(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+      body: activity.Request.Data.model,
+      json: true
+    });
 
     // send a success response
     activity.Response.Data = {
       id: id,
-      success: true
+      success: response.statusCode === 200
     };
   }
 
-  function generate() {
+  async function generate() {
     // Find the pagination parameters from request, or set defaults
     let action = 'firstpage';
     let page = parseInt(activity.Request.Query.page) || 1;
@@ -77,24 +85,29 @@ module.exports = async (activity) => {
     activity.Response.Data._page = page;
     activity.Response.Data._pageSize = pageSize;
 
-    const items = [];
+    const response = await got('https://jsonplaceholder.typicode.com/posts/');
+    const items = JSON.parse(response.body);
+
+    const paginatedItems = [];
 
     // loop from first to last index of current page
     for (let i = (page - 1) * pageSize; i < page * pageSize; i++) {
-      // generate an ID of page number + index on page (e.g. page 1 item 4, id = 104)
-      const id = (page * 100) + i + 1 - ((page - 1) * pageSize);
+      const item = items[i];
+
+      // if there's no item, we've reached the last one
+      if (!item) break;
 
       // genarate some random items, where we would normally fetch from API
-      items.push({
-        id: id,
-        title: `approval ${id}`,
+      paginatedItems.push({
+        id: item.id,
+        title: `approval ${item.id}`,
         description: 'PTO Request',
         date: new Date()
       });
     }
 
     // attach items to the response
-    activity.Response.Data.items = items;
+    activity.Response.Data.items = paginatedItems;
 
     // Title of card
     activity.Response.Data.title = 'My Approvals';
