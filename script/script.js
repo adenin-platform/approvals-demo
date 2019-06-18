@@ -40,7 +40,7 @@ module.exports = async (activity) => {
       json: true
     });
 
-    // send a success response
+    // send a success indication
     activity.Response.Data = {
       id: id,
       success: response.statusCode === 200
@@ -56,7 +56,7 @@ module.exports = async (activity) => {
       json: true
     });
 
-    // send a success response
+    // send a success indication
     activity.Response.Data = {
       id: id,
       success: response.statusCode === 200
@@ -97,7 +97,7 @@ module.exports = async (activity) => {
       // if there's no item, we've reached the last one
       if (!item) break;
 
-      // genarate some random items, where we would normally fetch from API
+      // use the API item's ID to create a fake 'approval'
       paginatedItems.push({
         id: item.id,
         title: `approval ${item.id}`,
@@ -116,7 +116,7 @@ module.exports = async (activity) => {
     activity.Response.Data.link = 'https://my-approvals.app/';
     activity.Response.Data.linkLabel = 'All Approvals';
 
-    // capture how many approvals we have
+    // capture how many approvals we have total (as we aren't returning them all, only pageSize of them)
     const value = items.length;
 
     // card isn't actionable if we have no approvals
