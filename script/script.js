@@ -43,7 +43,8 @@ module.exports = async (activity) => {
     // send a success indication
     activity.Response.Data = {
       id: id,
-      success: response.statusCode === 200
+      success: response.statusCode === 200,
+      message: 'Request was approved'
     };
   }
 
@@ -59,11 +60,13 @@ module.exports = async (activity) => {
     // send a success indication
     activity.Response.Data = {
       id: id,
-      success: response.statusCode === 200
+      success: response.statusCode === 200,
+      message: 'Request was rejected'
     };
   }
 
   async function generate() {
+    
     // Find the pagination parameters from request, or set defaults
     let action = 'firstpage';
     let page = parseInt(activity.Request.Query.page) || 1;
@@ -101,7 +104,7 @@ module.exports = async (activity) => {
       paginatedItems.push({
         id: item.id,
         title: `approval ${item.id}`,
-        description: 'PTO Request',
+        description: item.title,
         date: new Date()
       });
     }

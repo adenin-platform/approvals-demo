@@ -70,14 +70,14 @@ properties:
       		<div class="psm layout-horizontal" style="background-color: #E3F2E3;">
       			<at-carbon-icon icon="now:checkmark" class="" style="color: #43A942;"></at-carbon-icon>
       			<div class="plsm font-caption" style="margin-top: 2px;">
-      				Approved request.
+      				{{message}}
       			</div>
       		</div>
         {% elsif declined == true %}
         	<div class="psm layout-horizontal" style="background-color: #f2e2e2;">
       			<at-carbon-icon icon="now:cancel" class="" style="color: #a84141;"></at-carbon-icon>
       			<div class="plsm font-caption" style="margin-top: 2px;">
-      				Declined request.
+      				{{message}}
       			</div>
       		</div>
       	{% endif %}
@@ -93,17 +93,17 @@ properties:
       - _all
     modelRoot: state.model
 $meta:
-  cardId: !!int 35
+  cardId: 528
   preview-mode: live
   preview-container: item
   search-term: 
   service-url: 
   preview-data: |-
     {
-      "id": "1054889",
-      "title": "PTO Request",
-      "link": "https://www.adenin.com/pocdef",
-      "date": "2019-06-17T10:08:17.051Z"
+      "id": 1,
+      "title": "approval 1",
+      "description": "PTO Request",
+      "date": "2019-06-21T15:51:34.631Z"
     }
   xclass: 
   xstyle: 
@@ -112,16 +112,19 @@ $meta:
     	state.model.approved = false;
       state.model.declined = false;
       state.model.expanded = false;
+      state.model.message = "";  
     }
 
     action.quickApprove = function (evt) {
     	evt.model.approved = true;
       evt.model.declined = false;
+      evt.model.message = "Approving request..."; 
     }
 
     action.quickDecline = function (evt) {
     	evt.model.declined = true;
       evt.model.approved = false;  
+      evt.model.message = "Declining request...";  
     }
 
     action.expandBody = function (evt) {
