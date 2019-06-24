@@ -23,7 +23,7 @@ properties:
       	<div class="layout-vertical layout-center-center">
       		{% if value > 0 %}
       			<div class="approvals-count-circle green" style="border: 3px solid var(--at-green);">
-      				<div class="font-headline" style="text-align: center; line-height: 50px;">
+      				<div class="font-headline" style="text-align: center; line-height: 42px;">
       					{% if value > 99 %}
       						99+
       					{% else %}
@@ -60,7 +60,7 @@ properties:
   vlist7:
     type: element
     xtype: at-core-vlist
-    itemComponent: my-approvals/my-approvals-item-card
+    itemComponent: approvals-demo/approvals-demo-item-card
     modelBind: 'hide: !showList'
     hide: !!bool true
     listHeight: 315px
@@ -78,7 +78,7 @@ properties:
     modelBind: 'hide: !showList, expandable: items.length > 3, href: link, label: linkLabel'
     expandMode: 2
 $meta:
-  cardId: !!int 35
+  cardId: 528
   preview-data: |-
     {
       "_action": "firstpage",
@@ -86,20 +86,132 @@ $meta:
       "_pageSize": 20,
       "items": [
         {
-          "id": "1054889",
-          "title": "PTO Request",
-          "link": "https://www.adenin.com/pocdef",
-          "date": "2019-06-17T08:30:30.925Z"
+          "id": 1,
+          "title": "approval 1",
+          "description": "PTO Request",
+          "date": "2019-06-21T15:51:03.119Z"
+        },
+        {
+          "id": 2,
+          "title": "approval 2",
+          "description": "PTO Request",
+          "date": "2019-06-21T15:51:03.119Z"
+        },
+        {
+          "id": 3,
+          "title": "approval 3",
+          "description": "PTO Request",
+          "date": "2019-06-21T15:51:03.119Z"
+        },
+        {
+          "id": 4,
+          "title": "approval 4",
+          "description": "PTO Request",
+          "date": "2019-06-21T15:51:03.119Z"
+        },
+        {
+          "id": 5,
+          "title": "approval 5",
+          "description": "PTO Request",
+          "date": "2019-06-21T15:51:03.119Z"
+        },
+        {
+          "id": 6,
+          "title": "approval 6",
+          "description": "PTO Request",
+          "date": "2019-06-21T15:51:03.119Z"
+        },
+        {
+          "id": 7,
+          "title": "approval 7",
+          "description": "PTO Request",
+          "date": "2019-06-21T15:51:03.119Z"
+        },
+        {
+          "id": 8,
+          "title": "approval 8",
+          "description": "PTO Request",
+          "date": "2019-06-21T15:51:03.119Z"
+        },
+        {
+          "id": 9,
+          "title": "approval 9",
+          "description": "PTO Request",
+          "date": "2019-06-21T15:51:03.119Z"
+        },
+        {
+          "id": 10,
+          "title": "approval 10",
+          "description": "PTO Request",
+          "date": "2019-06-21T15:51:03.119Z"
+        },
+        {
+          "id": 11,
+          "title": "approval 11",
+          "description": "PTO Request",
+          "date": "2019-06-21T15:51:03.119Z"
+        },
+        {
+          "id": 12,
+          "title": "approval 12",
+          "description": "PTO Request",
+          "date": "2019-06-21T15:51:03.119Z"
+        },
+        {
+          "id": 13,
+          "title": "approval 13",
+          "description": "PTO Request",
+          "date": "2019-06-21T15:51:03.119Z"
+        },
+        {
+          "id": 14,
+          "title": "approval 14",
+          "description": "PTO Request",
+          "date": "2019-06-21T15:51:03.119Z"
+        },
+        {
+          "id": 15,
+          "title": "approval 15",
+          "description": "PTO Request",
+          "date": "2019-06-21T15:51:03.119Z"
+        },
+        {
+          "id": 16,
+          "title": "approval 16",
+          "description": "PTO Request",
+          "date": "2019-06-21T15:51:03.119Z"
+        },
+        {
+          "id": 17,
+          "title": "approval 17",
+          "description": "PTO Request",
+          "date": "2019-06-21T15:51:03.119Z"
+        },
+        {
+          "id": 18,
+          "title": "approval 18",
+          "description": "PTO Request",
+          "date": "2019-06-21T15:51:03.119Z"
+        },
+        {
+          "id": 19,
+          "title": "approval 19",
+          "description": "PTO Request",
+          "date": "2019-06-21T15:51:03.119Z"
+        },
+        {
+          "id": 20,
+          "title": "approval 20",
+          "description": "PTO Request",
+          "date": "2019-06-21T15:51:03.119Z"
         }
       ],
       "title": "My Approvals",
-      "link": "https://www.adenin.com/pocdef",
+      "link": "https://my-approvals.app/",
       "linkLabel": "All Approvals",
       "actionable": true,
-      "value": 1,
-      "color": "blue",
-      "description": "You have 1 approval.",
-      "_settings": {}
+      "value": 100,
+      "description": "You have 100 approvals"
     }
   preview-mode: live
   preview-container: event

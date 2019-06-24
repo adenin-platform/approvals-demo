@@ -8,7 +8,7 @@ MaxItemsField:
 PriorityField:
   Priority: 5
 StreamSource: null
-CardComponent: my-approvals/my-approvals-card
+CardComponent: approvals-demo/approvals-demo-card
 StoreMetadataField:
   description: See your pending approvals, quick approve them or open the Approvals App to manage them.
   logourl: my-approvals/Approvals.svg
@@ -29,7 +29,6 @@ ServicePart:
   ConnectorName: Script
   ServiceName: Script
   Url: ~/api/adenin.GateKeeper.Script
-  ServiceParameters: '{"tokens":""}'
 SearchContextPart:
   Query: null
   Interface: null
