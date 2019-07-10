@@ -33,10 +33,11 @@ module.exports = async (activity) => {
 
   async function approve() {
     // fetch the ID of the approved item
-    const id = activity.Request.Data.model.id;
+    const model = activity.Request.Data.model;
+    const id = model.id;
 
     const response = await got.put(`https://jsonplaceholder.typicode.com/posts/${id}`, {
-      body: activity.Request.Data.model,
+      body: model,
       json: true
     });
 
@@ -44,16 +45,25 @@ module.exports = async (activity) => {
     activity.Response.Data = {
       id: id,
       success: response.statusCode === 200,
-      message: 'Request was approved'
+      message: 'Request was approved',
+      history: {
+        message: "Purchase Requisition #" + id + ": approved",
+        url: "https://www.adenin.com/pocdef?id=" + id,
+        urlTitle: "PR #" + id,
+        type: "approve",
+        container: "Purchase Requistions",
+        containerUrl: "https://www.adenin.com/pocdef?app=PR"
+      }
     };
   }
 
   async function reject() {
     // fetch the ID of the rejected item
-    const id = activity.Request.Data.model.id;
+    const model = activity.Request.Data.model;
+    const id = model.id;
 
     const response = await got.put(`https://jsonplaceholder.typicode.com/posts/${id}`, {
-      body: activity.Request.Data.model,
+      body: model,
       json: true
     });
 
@@ -61,7 +71,15 @@ module.exports = async (activity) => {
     activity.Response.Data = {
       id: id,
       success: response.statusCode === 200,
-      message: 'Request was rejected'
+      message: 'Request was rejected',
+      history: {
+        message: "Purchase Requisition #" + id + ": rejected",
+        url: "https://www.adenin.com/pocdef?id=" + id,
+        urlTitle: "PR #" + id,
+        type: "reject",
+        container: "Purchase Requistions",
+        containerUrl: "https://www.adenin.com/pocdef?app=PR"
+      }
     };
   }
 
